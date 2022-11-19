@@ -55,7 +55,9 @@ export default function Navigation({ user }: { user: any }) {
               ) : null}
             </div>
           ) : (
-            <Link to="/login">Login</Link>
+            <Link to="/login" className="p-5 hover:bg-black hover:text-gray-100">
+              Login
+            </Link>
           )}
         </div>
       </div>

@@ -36,7 +36,7 @@ export async function getUserId(request: Request) {
   const session = await getUserSession(request);
   const userId = session.get('userId');
 
-  if (!userId || typeof userId !== 'number') return null;
+  if (!userId || typeof userId !== 'string') return null;
 
   return userId;
 }
@@ -44,7 +44,7 @@ export async function getUserId(request: Request) {
 export async function getUser(request: Request) {
   const userId = await getUserId(request);
 
-  if (typeof userId !== 'number') return null;
+  if (typeof userId !== 'string') return null;
 
   try {
     return await db.user.findUnique({
@@ -98,7 +98,7 @@ export async function requireUserId(
   const session = await getUserSession(request);
   const userId = session.get('userId');
 
-  if (!userId || typeof userId !== 'number') {
+  if (!userId || typeof userId !== 'string') {
     const searchParams = new URLSearchParams([['redirectTo', redirectTo]]);
     throw redirect(`/logon?${searchParams}`);
   }
